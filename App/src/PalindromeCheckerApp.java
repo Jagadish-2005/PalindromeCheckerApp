@@ -1,27 +1,23 @@
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
-        String input = "madam";
+        String input = "A man a plan a canal Panama";
 
-        // Initial call to the recursive method
-        boolean isPalindrome = check(input, 0, input.length() - 1);
+        // Normalization: Remove non-alphanumeric characters and convert to lowercase
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        boolean isPalindrome = true;
+
+        // Compare characters from both ends using the loop from the hint
+        for (int i = 0; i < normalized.length() / 2; i++) {
+            // Compare symmetric characters
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
 
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
-    }
-
-    private static boolean check(String s, int start, int end) {
-        // Base Case 1: If pointers meet or cross, it is a palindrome
-        if (start >= end) {
-            return true;
-        }
-
-        // Base Case 2: If characters at current pointers don't match
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
-
-        // Recursive Step: Move pointers inward and check again
-        return check(s, start + 1, end - 1);
     }
 }
